@@ -1,14 +1,36 @@
 const { stdout } = require('process');
 
-const main = function () {
-  let [x, y] = [0, 3];
+const eraseCursor = () => stdout.write('\x1B[?25l');
 
-  stdout.write('\x1B[?25l');
+class Zombie {
+  #x;
+  #y;
+  constructor(x, y) {
+    this.#x = x;
+    this.#y = y;
+  }
+  move() {
+    this.#x++;
+  }
+  getPosition() {
+    return [this.#x, this.#y];
+  }
+}
+
+const animate = (zombie) => {
+  const [x, y] = zombie.getPosition();
+  stdout.cursorTo(x, y);
+  stdout.clearLine();
+  zombie.move();
+  stdout.write('^');
+};
+
+const main = function () {
+  const zombie = new Zombie(0, 3);
+
+  eraseCursor();
   setInterval(() => {
-    stdout.cursorTo(x, y);
-    stdout.clearLine();
-    stdout.write('^');
-    x++;
+    animate(zombie);
   }, 500);
 };
 
