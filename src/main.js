@@ -1,23 +1,8 @@
 const { stdout } = require('process');
+const { Game } = require('./game.js');
+const { Zombie } = require('./zombie.js');
 
 const hideCursor = () => stdout.write('\x1B[?25l');
-
-class Zombie {
-  #x;
-  #y;
-  constructor(x, y) {
-    this.#x = x;
-    this.#y = y;
-  }
-
-  move() {
-    this.#x++;
-  }
-
-  visit(visitor) {
-    visitor(this.#x, this.#y);
-  }
-}
 
 const animate = (x, y) => {
   stdout.cursorTo(x, y);
@@ -28,10 +13,11 @@ const animate = (x, y) => {
 const main = function () {
   const zombie = new Zombie(0, 3);
 
+  const game = new Game(zombie);
   hideCursor();
   setInterval(() => {
-    zombie.visit(animate);
-    zombie.move();
+    game.visit(animate);
+    game.update();
   }, 500);
 };
 
