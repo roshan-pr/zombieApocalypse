@@ -15,7 +15,7 @@ class Zombie {
   }
 
   visit(visitor) {
-    visitor(this.#x, this.#y);
+    visitor(this.#x, this.#y, '🧟');
   }
 }
 

@@ -1,11 +1,14 @@
 class Game {
   #zombie;
-  constructor(zombie) {
+  #player;
+  constructor(player, zombie) {
+    this.#player = player;
     this.#zombie = zombie;
   }
 
   update() {
     this.#zombie.move();
+    this.#player.moveUp(0);
   }
 
   isOver(maxX) {
@@ -13,6 +16,7 @@ class Game {
   }
 
   visit(visitor) {
+    this.#player.visit(visitor);
     this.#zombie.visit(visitor);
   }
 }
