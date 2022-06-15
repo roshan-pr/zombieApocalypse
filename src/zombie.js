@@ -1,6 +1,6 @@
 const { stdout } = require('process');
 
-const eraseCursor = () => stdout.write('\x1B[?25l');
+const hideCursor = () => stdout.write('\x1B[?25l');
 
 class Zombie {
   #x;
@@ -28,7 +28,7 @@ const animate = (zombie) => {
 const main = function () {
   const zombie = new Zombie(0, 3);
 
-  eraseCursor();
+  hideCursor();
   setInterval(() => {
     animate(zombie);
   }, 500);
