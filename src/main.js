@@ -9,20 +9,20 @@ class Zombie {
     this.#x = x;
     this.#y = y;
   }
+
   move() {
     this.#x++;
   }
-  getPosition() {
-    return [this.#x, this.#y];
+
+  visit(visitor) {
+    visitor(this.#x, this.#y);
   }
 }
 
-const animate = (zombie) => {
-  const [x, y] = zombie.getPosition();
+const animate = (x, y) => {
   stdout.cursorTo(x, y);
   stdout.clearLine();
-  zombie.move();
-  stdout.write('^');
+  stdout.write('🧟');
 };
 
 const main = function () {
@@ -30,7 +30,8 @@ const main = function () {
 
   hideCursor();
   setInterval(() => {
-    animate(zombie);
+    zombie.visit(animate);
+    zombie.move();
   }, 500);
 };
 
