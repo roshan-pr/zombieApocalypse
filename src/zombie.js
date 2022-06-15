@@ -10,6 +10,10 @@ class Zombie {
     this.#x++;
   }
 
+  hasReached(abscissa) {
+    return this.#x === abscissa;
+  }
+
   visit(visitor) {
     visitor(this.#x, this.#y);
   }

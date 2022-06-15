@@ -12,12 +12,18 @@ const animate = (x, y) => {
 
 const main = function () {
   const zombie = new Zombie(0, 3);
+  const [maxX] = stdout.getWindowSize();
 
   const game = new Game(zombie);
   hideCursor();
   setInterval(() => {
     game.visit(animate);
     game.update();
+    if (game.isOver(maxX)) {
+      console.clear();
+      console.log('Game Over');
+      process.exit(1);
+    }
   }, 500);
 };
 

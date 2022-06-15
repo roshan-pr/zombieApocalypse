@@ -8,6 +8,10 @@ class Game {
     this.#zombie.move();
   }
 
+  isOver(maxX) {
+    return this.#zombie.hasReached(maxX);
+  }
+
   visit(visitor) {
     this.#zombie.visit(visitor);
   }
