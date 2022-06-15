@@ -11,22 +11,30 @@ const animate = (x, y, icon) => {
   stdout.write(icon);
 };
 
-const main = function () {
-  const [maxX, maxY] = stdout.getWindowSize();
+const createGame = (maxX, maxY) => {
   const zombie = new Zombie(0, 3);
   const player = new Player(maxX - 10, maxY - 10);
 
-  const game = new Game(player, zombie);
+  return new Game(player, zombie);
+};
+
+const playGame = (game, maxX) => {
+  game.visit(animate);
+  game.update();
+  if (game.isOver(maxX - 10)) {
+    console.clear();
+    console.log('Game Over');
+    process.exit(1);
+  }
+};
+
+const main = function () {
+  const [maxX, maxY] = stdout.getWindowSize();
+  const game = createGame(maxX, maxY);
   hideCursor();
   setInterval(() => {
-    game.visit(animate);
-    game.update();
-    if (game.isOver(maxX - 10)) {
-      console.clear();
-      console.log('Game Over');
-      process.exit(1);
-    }
-  }, 500);
+    playGame(game, maxX);
+  }, 50);
 };
 
 main();

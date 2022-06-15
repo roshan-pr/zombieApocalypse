@@ -1,10 +1,10 @@
 **TODO**
 
-- [ ] Extract create Game function
 - [ ] Control the player using user input
 
 **Done**
 
+- [x] Extract create Game function
 - [x] Add player class
   - [x] Moves up and down
 - [x] Create Game class
