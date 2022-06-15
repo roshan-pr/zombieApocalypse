@@ -1,9 +1,10 @@
 **TODO**
 
-- [ ] Control the player using user input
+- [ ] Introduce shoot class
 
 **Done**
 
+- [x] Control the player using user input
 - [x] Extract create Game function
 - [x] Add player class
   - [x] Moves up and down

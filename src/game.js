@@ -8,7 +8,6 @@ class Game {
 
   update() {
     this.#zombie.move();
-    this.#player.moveUp(0);
   }
 
   isOver(maxX) {
