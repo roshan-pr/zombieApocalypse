@@ -1,10 +1,11 @@
 **TODO**
 
-- [ ] Extract a position class
+- [ ] Assign more behavior to zombie
 - [ ] Update zombies differently
 
 **Done**
 
+- [x] Extract a position class
 - [x] Kill zombie when bullet hits
 - [x] Add multiple zombies 
 - [x] Introduce bullet class

@@ -1,25 +1,23 @@
 class Player {
-  #x;
-  #y;
-  constructor(x, y) {
-    this.#x = x;
-    this.#y = y;
+  #position;
+  constructor(position) {
+    this.#position = position;
   }
 
   moveUp(minY) {
-    if (this.#y > minY) {
-      this.#y--;
+    if (this.#position.isBelow(minY)) {
+      this.#position = this.#position.translate(0, -1);
     }
   }
 
   moveDown(maxY) {
-    if (this.#y < maxY) {
-      this.#y++;
+    if (this.#position.isAbove(maxY)) {
+      this.#position = this.#position.translate(0, 1);
     }
   }
 
   visit(visitor) {
-    return visitor(this.#x, this.#y, '😠');
+    return visitor(this.#position, '😠');
   }
 
 }

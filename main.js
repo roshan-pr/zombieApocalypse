@@ -4,21 +4,24 @@ const { Game } = require('./src/game.js');
 const { Player } = require('./src/player.js');
 const { Zombie } = require('./src/zombie.js');
 const { Bullet } = require('./src/bullet.js');
+const { Position } = require('./src/position.js');
 
 const hideCursor = () => stdout.write('\x1B[?25l');
 
-const erase = (x, y, icon) => {
-  stdout.cursorTo(x, y);
+const erase = (position, icon) => {
+  // console.log(position.toString());
+  position.visit((x, y) => stdout.cursorTo(x, y));
   stdout.write(' '.repeat(icon.length));
 };
 
-const animate = (x, y, icon) => {
-  stdout.cursorTo(x, y);
+const animate = (position, icon) => {
+  position.visit((x, y) => stdout.cursorTo(x, y));
   stdout.write(icon);
 };
 
-const createBullet = (x, y) => {
-  return new Bullet(x - 1, y);
+const createBullet = (position) => {
+  const bulletPos = position.translate(-1, 0);
+  return new Bullet(bulletPos);
 };
 
 const getMoves = (game, player, maxY) => {
@@ -30,9 +33,13 @@ const getMoves = (game, player, maxY) => {
   return moves;
 };
 
+const createZombie = (maxY) => {
+  const position = new Position(0, Math.ceil(Math.random() * (maxY - 1)));
+  return new Zombie(position);
+};
+
 const playGame = (game, maxX, maxY) => {
-  const zombie = new Zombie(0, Math.ceil(Math.random() * (maxY - 1)));
-  game.addZombie(zombie);
+  game.addZombie(createZombie(maxY));
   game.visit(erase);
   game.update();
   game.visit(animate);
@@ -46,7 +53,7 @@ const playGame = (game, maxX, maxY) => {
 const main = function () {
   const [maxX, maxY] = stdout.getWindowSize();
   stdin.setRawMode(true);
-  const player = new Player(maxX - 10, maxY - 10);
+  const player = new Player(new Position(maxX - 10, maxY));
   const game = new Game(player);
   const moves = getMoves(game, player, maxY);
 

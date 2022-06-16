@@ -1,24 +1,22 @@
 class Bullet {
-  #x;
-  #y;
+  #position;
 
-  constructor(x, y) {
-    this.#x = x;
-    this.#y = y;
+  constructor(position) {
+    this.#position = position;
   }
 
   move(minX) {
-    if (this.#x > minX) {
-      this.#x--;
+    if (this.#position.isRight(minX)) {
+      this.#position = this.#position.translate(-1, 0);
     }
   }
 
   getPosition() {
-    return [this.#x, this.#y];
+    return this.#position;
   }
 
   visit(visitor) {
-    visitor(this.#x, this.#y, '-');
+    visitor(this.#position, '-');
   }
 }
 

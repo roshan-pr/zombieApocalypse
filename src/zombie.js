@@ -1,25 +1,23 @@
 class Zombie {
-  #x;
-  #y;
-  constructor(x, y) {
-    this.#x = x;
-    this.#y = y;
+  #position;
+  constructor(position) {
+    this.#position = position;
   }
 
   move() {
-    this.#x++;
-  }
-
-  getPosition() {
-    return [this.#x, this.#y];
+    this.#position = this.#position.translate(1, 0);
   }
 
   hasReached(abscissa) {
-    return this.#x === abscissa;
+    return this.#position.hasReachedMaxX(abscissa);
+  }
+
+  getPosition() {
+    return this.#position;
   }
 
   visit(visitor) {
-    visitor(this.#x, this.#y, '🧟');
+    visitor(this.#position, '🧟');
   }
 }
 

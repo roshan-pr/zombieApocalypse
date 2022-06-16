@@ -10,10 +10,9 @@ class Game {
 
   #killZombie() {
     this.#bullets.forEach((bullet, bulletIndex) => {
-      const [bulletX, bulletY] = bullet.getPosition();
+      const bulletPosition = bullet.getPosition();
       this.#zombies.forEach((zombie, zombieIndex) => {
-        const [zombieX, zombieY] = zombie.getPosition();
-        if (bulletX === zombieX && bulletY === zombieY) {
+        if (bulletPosition.equals(zombie.getPosition())) {
           this.#zombies.splice(zombieIndex, 1);
           this.#bullets.splice(bulletIndex, 1);
         }
@@ -26,6 +25,7 @@ class Game {
     this.#zombies.forEach((zombie) => {
       zombie.move();
     });
+    this.#killZombie();
     this.#bullets.forEach((bullet) => {
       bullet.move(0);
     });
