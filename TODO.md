@@ -1,9 +1,11 @@
 **TODO**
 
+- [ ] Kill zombie when bullet hits
 - [ ] Extract a position class
 
 **Done**
 
+- [x] Add multiple zombies 
 - [x] Introduce bullet class
 - [x] Control the player using user input
 - [x] Extract create Game function

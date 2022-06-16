@@ -1,18 +1,24 @@
 class Game {
-  #zombie;
+  #zombies;
   #player;
   #bullets;
-  constructor(player, zombie) {
+  constructor(player) {
     this.#player = player;
-    this.#zombie = zombie;
+    this.#zombies = [];
     this.#bullets = [];
   }
 
   update() {
-    this.#zombie.move();
+    this.#zombies.forEach((zombie) => {
+      zombie.move();
+    });
     this.#bullets.forEach((bullet) => {
       bullet.move(0);
     });
+  }
+
+  addZombie(zombie) {
+    this.#zombies.push(zombie);
   }
 
   addBullet(bullet) {
@@ -20,12 +26,16 @@ class Game {
   }
 
   isOver(maxX) {
-    return this.#zombie.hasReached(maxX);
+    return this.#zombies.some((zombie) => {
+      return zombie.hasReached(maxX);
+    });
   }
 
   visit(visitor) {
     this.#player.visit(visitor);
-    this.#zombie.visit(visitor);
+    this.#zombies.forEach((zombie) => {
+      zombie.visit(visitor);
+    });
     this.#bullets.forEach((bullet) => {
       bullet.visit(visitor);
     });

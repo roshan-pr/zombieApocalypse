@@ -30,7 +30,9 @@ const getMoves = (game, player, maxY) => {
   return moves;
 };
 
-const playGame = (game, maxX) => {
+const playGame = (game, maxX, maxY) => {
+  const zombie = new Zombie(0, Math.ceil(Math.random() * (maxY - 1)));
+  game.addZombie(zombie);
   game.visit(erase);
   game.update();
   game.visit(animate);
@@ -44,9 +46,8 @@ const playGame = (game, maxX) => {
 const main = function () {
   const [maxX, maxY] = stdout.getWindowSize();
   stdin.setRawMode(true);
-  const zombie = new Zombie(0, 3);
   const player = new Player(maxX - 10, maxY - 10);
-  const game = new Game(player, zombie);
+  const game = new Game(player);
   const moves = getMoves(game, player, maxY);
 
   stdin.on('data', (keyStroke) => {
@@ -56,8 +57,8 @@ const main = function () {
   hideCursor();
 
   setInterval(() => {
-    playGame(game, maxX);
-  }, 50);
+    playGame(game, maxX, maxY);
+  }, 500);
 };
 
 main();
