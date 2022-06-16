@@ -9,7 +9,6 @@ const { Position } = require('./src/position.js');
 const hideCursor = () => stdout.write('\x1B[?25l');
 
 const erase = (position, icon) => {
-  // console.log(position.toString());
   position.visit((x, y) => stdout.cursorTo(x, y));
   stdout.write(' '.repeat(icon.length));
 };
@@ -38,8 +37,10 @@ const createZombie = (maxY) => {
   return new Zombie(position);
 };
 
-const playGame = (game, maxX, maxY) => {
-  game.addZombie(createZombie(maxY));
+const playGame = (game, maxX, maxY, duration) => {
+  if (duration === 0) {
+    game.addZombie(createZombie(maxY));
+  }
   game.visit(erase);
   game.update();
   game.visit(animate);
@@ -50,13 +51,13 @@ const playGame = (game, maxX, maxY) => {
   }
 };
 
-const main = function () {
+const main = function (speed = 1) {
+  let duration = 100 - speed;
   const [maxX, maxY] = stdout.getWindowSize();
   stdin.setRawMode(true);
   const player = new Player(new Position(maxX - 10, maxY));
   const game = new Game(player);
   const moves = getMoves(game, player, maxY);
-
   stdin.on('data', (keyStroke) => {
     player.visit(erase);
     moves.emit(keyStroke);
@@ -64,8 +65,12 @@ const main = function () {
   hideCursor();
 
   setInterval(() => {
-    playGame(game, maxX, maxY);
-  }, 200);
+    if (duration < 0) {
+      duration = 100 - speed;
+    }
+    playGame(game, maxX, maxY, duration);
+    duration--;
+  }, 50);
 };
 
-main();
+main(+process.argv[2]);

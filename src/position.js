@@ -30,10 +30,6 @@ class Position {
     visitor(this.#x, this.#y);
   }
 
-  toString() {
-    return `${this.#x}: ${this.#y}`;
-  }
-
   equals(otherPosition) {
     return otherPosition instanceof Position &&
       this.#x === otherPosition.#x &&

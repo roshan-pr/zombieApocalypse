@@ -1,10 +1,12 @@
 **TODO**
 
+- [ ] Remove bullet if it has reached end of screen
 - [ ] Assign more behavior to zombie
-- [ ] Update zombies differently
 
 **Done**
 
+- [x] Take speed of zombies from user
+- [ ] ~~Update zombies differently~~
 - [x] Extract a position class
 - [x] Kill zombie when bullet hits
 - [x] Add multiple zombies 
