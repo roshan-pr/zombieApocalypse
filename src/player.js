@@ -19,7 +19,7 @@ class Player {
   }
 
   visit(visitor) {
-    visitor(this.#x, this.#y, '😠');
+    return visitor(this.#x, this.#y, '😠');
   }
 
 }

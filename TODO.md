@@ -1,9 +1,10 @@
 **TODO**
 
-- [ ] Introduce shoot class
+- [ ] Extract a position class
 
 **Done**
 
+- [x] Introduce bullet class
 - [x] Control the player using user input
 - [x] Extract create Game function
 - [x] Add player class
