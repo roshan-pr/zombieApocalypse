@@ -8,7 +8,21 @@ class Game {
     this.#bullets = [];
   }
 
+  #killZombie() {
+    this.#bullets.forEach((bullet, bulletIndex) => {
+      const [bulletX, bulletY] = bullet.getPosition();
+      this.#zombies.forEach((zombie, zombieIndex) => {
+        const [zombieX, zombieY] = zombie.getPosition();
+        if (bulletX === zombieX && bulletY === zombieY) {
+          this.#zombies.splice(zombieIndex, 1);
+          this.#bullets.splice(bulletIndex, 1);
+        }
+      });
+    });
+  }
+
   update() {
+    this.#killZombie();
     this.#zombies.forEach((zombie) => {
       zombie.move();
     });

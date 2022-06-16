@@ -58,7 +58,7 @@ const main = function () {
 
   setInterval(() => {
     playGame(game, maxX, maxY);
-  }, 500);
+  }, 200);
 };
 
 main();

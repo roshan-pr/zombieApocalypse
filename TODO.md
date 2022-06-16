@@ -1,10 +1,11 @@
 **TODO**
 
-- [ ] Kill zombie when bullet hits
 - [ ] Extract a position class
+- [ ] Update zombies differently
 
 **Done**
 
+- [x] Kill zombie when bullet hits
 - [x] Add multiple zombies 
 - [x] Introduce bullet class
 - [x] Control the player using user input

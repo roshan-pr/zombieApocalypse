@@ -10,6 +10,10 @@ class Zombie {
     this.#x++;
   }
 
+  getPosition() {
+    return [this.#x, this.#y];
+  }
+
   hasReached(abscissa) {
     return this.#x === abscissa;
   }

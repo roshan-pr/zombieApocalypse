@@ -13,8 +13,12 @@ class Bullet {
     }
   }
 
+  getPosition() {
+    return [this.#x, this.#y];
+  }
+
   visit(visitor) {
-    visitor(this.#x, this.#y, '--');
+    visitor(this.#x, this.#y, '-');
   }
 }
 
