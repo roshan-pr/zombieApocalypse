@@ -1,10 +1,13 @@
 **TODO**
 
-- [ ] Remove bullet if it has reached end of screen
+- [ ] Different interval for zombie creation
 - [ ] Assign more behavior to zombie
 
 **Done**
 
+- [x] Move play game to game class
+- [x] Refactor main.js
+- [x] Remove bullet if it has reached end of screen
 - [x] Take speed of zombies from user
 - [ ] ~~Update zombies differently~~
 - [x] Extract a position class

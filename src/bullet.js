@@ -15,6 +15,10 @@ class Bullet {
     return this.#position;
   }
 
+  isOutOfRange(minX) {
+    return !this.#position.isRight(minX);
+  }
+
   visit(visitor) {
     visitor(this.#position, '-');
   }

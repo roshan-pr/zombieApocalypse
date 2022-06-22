@@ -70,7 +70,7 @@
     "no-mixed-operators": "error",
     "complexity": [
       "error",
-      4
+      5
     ],
     "no-extra-parens": "error",
     "no-template-curly-in-string": "error",
