@@ -11,8 +11,7 @@ const createGame = () => {
   return new Game(player, maxX, maxY);
 };
 
-const main = function (speed = 1) {
-  let duration = 100 - speed;
+const main = function (zombieCreationInterval = 5) {
   const game = createGame();
   stdin.setRawMode(true);
   stdin.on('data', (keyStroke) => {
@@ -20,13 +19,12 @@ const main = function (speed = 1) {
     game.operate(asciiValue);
   });
   hideCursor();
+  setInterval(() => {
+    game.addZombie();
+  }, zombieCreationInterval * 1000);
 
   setInterval(() => {
-    if (duration < 0) {
-      duration = 100 - speed;
-    }
-    game.play(duration);
-    duration--;
+    game.play();
   }, 50);
 };
 

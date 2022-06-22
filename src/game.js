@@ -17,10 +17,7 @@ class Game {
     this.#bullets = [];
   }
 
-  play(duration) {
-    if (duration === 0) {
-      this.addZombie(createZombie(this.#maxY));
-    }
+  play() {
     this.visit(erase);
     this.update();
     this.visit(animate);
@@ -29,6 +26,10 @@ class Game {
       console.log('Game Over');
       process.exit(1);
     }
+  }
+
+  addZombie() {
+    this.#zombies.push(createZombie(this.#maxY));
   }
 
   #killZombie() {
@@ -63,10 +64,6 @@ class Game {
         this.#removeBullet(index);
       }
     });
-  }
-
-  addZombie(zombie) {
-    this.#zombies.push(zombie);
   }
 
   #addBullet(bullet) {

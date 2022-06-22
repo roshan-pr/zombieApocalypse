@@ -1,6 +1,7 @@
 **TODO**
 
 - [ ] Different interval for zombie creation
+- [ ] Bring the cursor back after game over
 - [ ] Assign more behavior to zombie
 
 **Done**
